@@ -3,6 +3,10 @@
 ####WARNING:
 If working on **Windows** make sure to use **Docker for Windows with WSL2 integration**. Keep the project files on WSL volume (\\$wsl\[DISTRO_NAME]\[PROJECT_PATH])
 
+### Git submodule setup instructions: ####
+1. Fire submodule update command
+   `git submodule update --init --recursive`
+
 ### Local setup instructions: ####
 1. Navigate to docker folder
 	`cd /docker/*`
