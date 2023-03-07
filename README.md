@@ -3,7 +3,13 @@
 ####WARNING:
 If working on **Windows** make sure to use **Docker for Windows with WSL2 integration**. Keep the project files on WSL volume (\\$wsl\[DISTRO_NAME]\[PROJECT_PATH])
 
-### Git submodule setup instructions: ####
+### Git submodule add instructions for existing project: ####
+1. Go to docker folder (f.e. ./docker/)
+2. Fire submodule add command in docker folder
+   `git submodule add git@github.com:papablack/docker-boilerplate.git <submodule path>`
+   submodule path is f.e "dev" if you want docker in docker/dev
+
+### Git submodule install instructions for existing project: ####
 1. Fire submodule update command
    `git submodule update --init --recursive`
 
