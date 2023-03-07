@@ -1,0 +1,57 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql_${COMPOSE_PROJECT_NAME}
+    image: mysql:5.7
+    env_file:
+      - ./.env
+    environment:
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_LOW_USR}
+      MYSQL_PASSWORD: ${MYSQL_LOW_USR_PASS}
+    ports:
+      - ${MYSQL_EXT_PORT}:${MYSQL_INT_PORT}
+#    user: mysql
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/my.cnf            
+      - mysql_data_volume:/var/lib/mysql
+
+  php:
+    container_name: php_${COMPOSE_PROJECT_NAME}
+    build: php-fpm
+    dns:
+      - 8.8.8.8
+    env_file:
+      - ./.env
+    environment:
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+    ports:
+      - ${PHP_EXT_PORT}:${PHP_INT_PORT}
+    volumes:
+      - ../../:/app      
+    links:
+      - mysql
+  nginx:
+    container_name: nginx_${COMPOSE_PROJECT_NAME}
+    build: nginx
+    dns:
+      - 8.8.8.8
+    env_file:
+      - ./.env
+    environment:
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+    ports:
+      - ${HTTP_EXT_PORT}:${HTTP_INT_PORT}
+      - ${HTTPS_EXT_PORT}:${HTTPS_INT_PORT}      
+    links:
+      - php
+    volumes:
+      - ../../:/app
+      - ./nginx/env/keyz:/var/keyz      
+
+volumes:
+  mysql_data_volume:     
+    external: 
+      name: mysql_data_volume_${COMPOSE_PROJECT_NAME}
