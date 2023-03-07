@@ -2,9 +2,7 @@
 if [ ! -f /var/.startup/.installed ]; then
     cd /app || exit
 
-    sh /var/.run/composer.sh    
-
-    php ./init --env=Development --overwrite=All --delete=All
+    sh /var/.run/composer.sh        
 
     yarn
 

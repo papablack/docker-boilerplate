@@ -30,7 +30,7 @@ services:
     ports:
       - ${PHP_EXT_PORT}:${PHP_INT_PORT}
     volumes:
-      - ../../:/app      
+      - ${APP_PATH}:/app      
     links:
       - mysql
   nginx:
@@ -48,7 +48,7 @@ services:
     links:
       - php
     volumes:
-      - ../../:/app
+      - ${APP_PATH}:/app
       - ./nginx/env/keyz:/var/keyz      
 
 volumes:
