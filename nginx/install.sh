@@ -4,6 +4,7 @@ if [ ! -f /var/.startup/.installed ]; then
 
     echo "Replacing env vars in nginx config files for domains: ${DOMAINS}"
     sed -i "s|\[DOMAINS\]|$DOMAINS|g" /etc/nginx/conf.d/default.conf
+    sed -i "s|\[PUBLIC_FOLDER\]|$PUBLIC_FOLDER|g" /etc/nginx/conf.d/default.conf
     sed -i "s|\[PHP_INT_PORT\]|$PHP_INT_PORT|g" /etc/nginx/conf.d/default.conf
     sed -i "s|\[PHP_HOST\]|$PHP_HOST|g" /etc/nginx/conf.d/default.conf
     sed -i "s|\[HTTP_INT_PORT\]|$HTTP_INT_PORT|g" /etc/nginx/conf.d/default.conf
